@@ -1,0 +1,83 @@
+<!-- {{name}}
+<div *ngIf="person.age>=18,else under18">Đủ tuổi để tham gia</div>
+<ng-template #under18>
+  <div>
+    Không đủ tuổi để tham gia
+  </div>
+</ng-template>
+<app-hello></app-hello>
+<input [type]="typetext" [value]="person.name" (change)="change()">
+<button type="button" (click)="handler($event)">Click me</button>
+
+<br>
+<br>
+<input type="text" [(ngModel)]="name">
+<br>
+<div style="padding-top: 20px;">
+  <button (click)="person.age = person.age - 1">-</button>
+  Age:{{[person.age]}}
+  <button (click)="person.age = person.age + 1">+</button>
+</div> -->
+
+
+<!-- <div class="col-md-12 py-3 px-4" *ngIf="users.length>0;else noUsers">
+  <table class="table table-striped " [class.table-bordered]="border">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Id</th>
+        <th>Number</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let u of users; index as index; even as even; odd as odd">
+        <td>{{index}}</td>
+        <td>
+          {{u.name}}
+          <span *ngIf="even">-----Chẵn</span>
+          <span *ngIf="odd">-----Lẻ</span>
+        </td>
+        <td>{{u.id}}</td>
+        <td>{{u.phone}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<ng-template #noUsers>No users</ng-template>
+<div class="text-center">
+  <button class="btn btn-success" (click)="border=!border">change border</button>
+
+</div> -->
+
+<!-- bai7
+<button class="btn btn-success" (click)="progressCurrent = progressCurrent+1">+</button>
+<button class="btn btn-warning" (click)="progressCurrent = progressCurrent-1">-</button>
+<app-progress-bar></app-progress-bar>
+<app-progress-bar [progress]="progressCurrent" [progressColor]="'orange'"></app-progress-bar> -->
+
+<!-- <app-users-list></app-users-list> -->
+
+
+
+<!-- <div class="fuild-contain p-3">
+  <app-toggle #Toggle [(toggle)]="ischeck"></app-toggle>
+  <button (click)="Toggle.check()" class="btn btn-success mt-3">click</button>
+  <div class="pt-3">
+    <input type="text" class="form-control" #input value="abc">
+  </div>
+</div> -->
+<div class="container-fluid row">
+<div class="col-md-2 float-left" style="background-color: slategray; min-height: 930px;">
+<img  src="https://www.brggroup.vn/public/media//logo.png" alt="logo" style="width: 138px;height: 123px;padding: 15px;">
+
+<app-org></app-org>
+</div>
+<div class="col-md-10 float-left">
+  <router-outlet></router-outlet>
+</div>
+</div>
+
+
+
+
