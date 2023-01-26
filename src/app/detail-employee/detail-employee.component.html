@@ -1,0 +1,100 @@
+<div class="row cool-md-12 text-center pt-3">
+    <h2>Detail Employee</h2>
+</div>
+<div class="container-fluid col d-flex justify-content-center">
+    <div class="col-md-12 px-5 py-3">
+        <form>
+            <div class="col-md-12 row py-3">
+                <div class="form-group col-md-4">
+                    <label>First Name:</label>
+                    <input type="text" class="form-control" disabled="disabled" [value]="employee.firstName">
+                </div>
+                <div class="form-group col-md-4">
+                    <label> Last Name:</label>
+                    <input type="text" class="form-control" disabled="disabled"[value]="employee.lastName">
+                    
+                </div>
+                <div class="form-group col-md-4">
+                    <label> Birthday:</label>
+                    <input type="date" class="form-control" disabled="disabled" [value]="employee.dob">
+                </div>
+            </div>
+            <div class="col-md-12 row py-3">
+                <div class="form-group col-md-4">
+                    <label>Email:</label>
+                    <input type="email" class="form-control" disabled="disabled" [value]="employee.email">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Telephone:</label>
+                    <input type="text" class="form-control" disabled="disabled" [value]="employee.telephone">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Mobiphone:</label>
+                    <input type="text" class="form-control" disabled="disabled" [value]="employee.mobiphone">
+                </div>
+            </div>
+            <div class="col-md-12 row py-3">
+                <div class="form-group col-md-4">
+                    <label>Address:</label>
+                    <input type="text" class="form-control" disabled="disabled" [value]="employee.address">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>UserLogin:</label>
+                    <input type="text" class="form-control" disabled="disabled" [value]="employee.userLogin">
+                </div>
+                <div class="form-group col-md-4">
+                    <label > Department:</label>
+                    <input type="text" class="form-control" disabled="disabled" [value]="getNameOrg(employee.c_Org_Id)?.name">
+                </div>
+            </div>
+        </form>
+        <div class="col-md-12 mt-4 pr-3">
+            <div class="row col-md-12">
+                <h4 class="col-md-6" style="padding-top: 13px;">Working History</h4>
+                <div class="col-md-6 pr-0">
+                    <a type="button" [routerLink]="['/add-wh']" routerLinkActive="router-link-active" class="btn btn-success float-end my-2"  >Add</a>
+                </div>
+            </div>
+            
+            <table class="table table-border table-hover table-bordered">
+                <thead >
+                    <tr class="text-center">
+                        <th>STT</th>
+                        <th>Job Title</th>
+                        <th>Begin</th>
+                        <th>End</th>
+                        <th>Department</th>
+                        <th>Salary Amt</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="count > 0; else rong">
+                    <tr *ngFor="let l of listWH; let i = index ">
+                        <td>{{i+1}}</td>
+                        <td>{{l.jobTitle}}</td>
+                        <td>{{formatDate(l.from_Date)}}</td>
+                        <td>{{formatDate(l.to_Date)}}</td>
+                        <td>{{getNameOrg(l.c_Org_Id)?.name}}</td>
+                        <td>{{l.salaryAmt}}</td>
+                        <td>
+                            <a [routerLink]="['/update-wh']" routerLinkActive="router-link-active" (click)="onUpdateWHClick(l.hR_WorkingHistory_Id)">Edit</a>
+                            &nbsp;|&nbsp;
+                            <a style="text-decoration: underline; color: #0d6efd; cursor: pointer;" (click)="onDeleteWHClick(l.hR_WorkingHistory_Id)" >Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+                <ng-template #rong>
+                    <tbody >
+                        <tr class="text-center py-3">
+                            No Work History
+                        </tr>
+                    </tbody>
+                </ng-template>
+            </table>
+        </div>
+        <hr style="margin-top: 100px;">
+        <button type="button" class="btn btn-dark" [routerLink]="['']" routerLinkActive="router-link-active">Back</button>
+    </div>
+    
+    
+</div>

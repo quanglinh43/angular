@@ -18,19 +18,19 @@
             
             
         </div>
-        
         <table class="table table-border table-hover table-bordered">
             <thead>
-                <tr>
+                <tr class="text-center">
                     
                     <th>STT</th>
                     <th>FirstName</th>
                     <th>LastName</th>
+                    <th>Birthday</th>
                     <th>Email</th>
-                    <th>Telephone</th>
+                    <!-- <th>Telephone</th> -->
                     <th>Mobiphone</th>
                     <th>Address</th>
-                    <th>UserLogin</th>
+                    <!-- <th>UserLogin</th> -->
                     <th>Department</th>
                     <th>Status</th>
                     <th>Action</th>
@@ -42,11 +42,12 @@
                     <td>{{i+1}}</td>
                     <td>{{l.hR_Employee.firstName}}</td>
                     <td>{{l.hR_Employee.lastName}}</td>
+                    <td>{{formatDate(l.hR_Employee.dob)}}</td>
                     <td>{{l.hR_Employee.email}}</td>
-                    <td>{{l.hR_Employee.telephone}}</td>
+                    <!-- <td>{{l.hR_Employee.telephone}}</td> -->
                     <td>{{l.hR_Employee.mobiphone}}</td>
                     <td>{{l.hR_Employee.address}}</td>
-                    <td>{{l.hR_Employee.userLogin}}</td>
+                    <!-- <td>{{l.hR_Employee.userLogin}}</td> -->
                     <td>{{l.c_Org_name}}</td>
                     <td>
                         <div class="form-check form-switch" style="cursor: pointer;" *ngIf="l.hR_Employee.isActive;else noActive" (click)="onStatusClick(l.hR_Employee.hR_Employee_Id)">
@@ -60,9 +61,13 @@
                               </div>
                         </ng-template>
                     </td>
-                    <td><a [routerLink]="['/update']" routerLinkActive="router-link-active" (click)="onUpdateClick(l.hR_Employee_Id)">Edit</a>
+                    <td>
+                        <a [routerLink]="['/detail']" routerLinkActive="router-link-active" (click)="onDetailClick(l.hR_Employee.hR_Employee_Id)" >Detail</a>
                         &nbsp;|&nbsp;
-                        <a style="text-decoration: underline; color: #0d6efd; cursor: pointer;" (click)="onDeleteClick(l.hR_Employee_Id)" >Delete</a></td>
+                        <a [routerLink]="['/update']" routerLinkActive="router-link-active" (click)="onUpdateClick(l.hR_Employee.hR_Employee_Id)">Edit</a>
+                        &nbsp;|&nbsp;
+                        <a style="text-decoration: underline; color: #0d6efd; cursor: pointer;" (click)="onDeleteClick(l.hR_Employee.hR_Employee_Id)" >Delete</a>
+                    </td>
                 </tr>
             </tbody>
         </table>

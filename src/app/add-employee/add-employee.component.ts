@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ngbCarouselTransitionOut } from '@ng-bootstrap/ng-bootstrap/carousel/carousel-transition';
 import { TestService } from '../test.service';
 
@@ -10,22 +10,34 @@ import { TestService } from '../test.service';
 })
 export class AddEmployeeComponent implements OnInit {
   now = new Date();
+  listOrg!:any[];
   constructor(private testservice:TestService, private fb:FormBuilder){};
   ngOnInit(): void {
-    
+    this.testservice.getAllOrg().subscribe(sc=>{
+      this.listOrg=sc;
+    })
+    //console.log(this.f.email.errors);
   }
 
+  get f () {
+    return this.inforForm.controls;
+  }
   inforForm = this.fb.group({
-    firstName: [''],
-    lastName: [''],
-    email: [''],
+    firstName: ['',[Validators.required]],
+    lastName: ['',[Validators.required]],
+    email: ['',[Validators.required,Validators.email]],
     telephone: [''],
     mobiphone: [''],
     address: [''],
     userLogin: [''],
+    dOB:['',[Validators.required]],
+    department:['',[Validators.required]],
 
 
   });
+  onChangeOrg(){
+    //console.log(this.inforForm.value.dOB?.toString());
+  }
   onSubmit () {
     var form= this.inforForm.value;
     var employee:IEmployee ={
@@ -38,11 +50,11 @@ export class AddEmployeeComponent implements OnInit {
       "code":"",
       "firstName":(String)(form.firstName),
       "lastName": (String)(form.lastName),
-      "dob":this.now.toISOString(),
+      "dob":(String)(form.dOB),
       "email":(String)(form.email),
       "telephone":(String)(form.telephone),
       "mobiphone":(String)(form.mobiphone),
-      "c_Org_Id":2,
+      "c_Org_Id":(Number)(form.department),
       "address":(String)(form.address),
       "userLogin":(String)(form.userLogin),
     }

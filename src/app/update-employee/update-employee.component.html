@@ -4,7 +4,7 @@
 <div class="container-fluid col d-flex justify-content-center">
     <div class="col-md-12 px-5 py-3">
         <form [formGroup]="inforForm" (ngSubmit)="onSubmit()">
-            <div class="col-md-12 row py-3">
+            <!-- <div class="col-md-12 row py-3">
                 <div class="form-group col-md-6">
                     <label>First Name:</label>
                     <input type="text" class="form-control" formControlName="firstName" [(ngModel)]="employee.firstName" required>
@@ -36,6 +36,86 @@
                 <div class="form-group col-md-6">
                     <label>UserLogin:</label>
                     <input type="text" class="form-control" formControlName="userLogin" [(ngModel)]="employee.userLogin">
+                </div>
+            </div> -->
+            <div class="col-md-12 row py-3">
+                <div class="form-group col-md-4">
+                    <label class="batbuoc" [class.text-red]="f.firstName.errors && f.firstName.dirty">First Name:</label>
+                    <input type="text" class="form-control" [class.border-red]="f.firstName.errors && f.firstName.dirty"
+                     formControlName="firstName" [(ngModel)]="employee.firstName" required>
+                    <div *ngIf="f.firstName.invalid && f.firstName.dirty">
+                        <div for="" *ngIf="f.firstName.errors">
+                            <small for="" *ngIf="f.firstName.errors?.['required']">The first name is required</small>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                <div class="form-group col-md-4">
+                    <label class="batbuoc" [class.text-red]="f.lastName.errors && f.lastName.dirty"> Last Name:</label>
+                    <input type="text" class="form-control" [class.border-red]="f.lastName.errors && f.lastName.dirty" 
+                    formControlName="lastName" [(ngModel)]="employee.lastName" required>
+                    <div *ngIf="f.lastName.invalid && f.lastName.dirty">
+                        <div for="" *ngIf="f.lastName.errors">
+                            <small for="" *ngIf="f.lastName.errors?.['required']">The last name is required</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label class="batbuoc" [class.text-red]="f.dob.errors && f.dob.dirty"> Birthday:</label>
+                    <input type="date" class="form-control" [class.border-red]="f.dob.errors && f.dob.dirty" 
+                    formControlName="dob" [(ngModel)]="employee.dob" required>
+                    sn:{{employee.dob}}
+                    <div *ngIf="f.dob.invalid && f.dob.dirty">
+                        <div for="" *ngIf="f.dob.errors">
+                            <small *ngIf="f.dob.errors?.['required']">The birthday is required</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 row py-3">
+                <div class="form-group col-md-4">
+                    <label class="batbuoc" [class.text-red]="f.email.errors && f.email.dirty">Email:</label>
+                    <input type="email" class="form-control" [class.border-red]="f.email.errors && f.email.dirty" 
+                    formControlName="email" [(ngModel)]="employee.email" required>
+                    <div *ngIf="f.email.invalid && f.email.dirty">
+                        <div for="" *ngIf="f.email.errors">
+                            <small *ngIf="f.email.errors?.['required']">The email is required</small>
+    
+                            <small *ngIf="f.email.errors?.['email']">Must be email</small>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Telephone:</label>
+                    <input type="text" class="form-control" formControlName="telephone" [(ngModel)]="employee.telephone">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Mobiphone:</label>
+                    <input type="text" class="form-control" formControlName="mobiphone" [(ngModel)]="employee.mobiphone" >
+                </div>
+            </div>
+            <div class="col-md-12 row py-3">
+                <div class="form-group col-md-4">
+                    <label>Address:</label>
+                    <input type="text" class="form-control" formControlName="address" [(ngModel)]="employee.address">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>UserLogin:</label>
+                    <input type="text" class="form-control" formControlName="userLogin" [(ngModel)]="employee.userLogin">
+                </div>
+                <div class="form-group col-md-4">
+                    <label class="batbuoc" [class.text-red]="f.department.errors && f.department.dirty"> Department:</label>
+                    <select class="form-select" [class.border-red]="f.department.errors && f.department.dirty" formControlName="department" (change)="onChangeOrg()" [(ngModel)]="employee.c_Org_Id">
+                        <option *ngFor="let o of listOrg" [value]="o.c_Org_Id">{{o.name}}</option>
+                    </select>
+                    <div *ngIf="f.department.invalid && f.department.dirty">
+                        <div for="" *ngIf="f.department.errors">
+                            <small for="" *ngIf="f.department.errors?.['required']">The department is required</small>
+                        </div>
+                    </div>
                 </div>
             </div>
             <button type="button" [disabled]="!inforForm.valid" class="btn btn-success" [routerLink]="['']" routerLinkActive="router-link-active" (click)="onSaveClick()">Save</button>

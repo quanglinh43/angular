@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { TestService } from '../test.service';
 
 @Component({
@@ -10,15 +10,23 @@ import { TestService } from '../test.service';
 export class UpdateEmployeeComponent {
   now = new Date();
   employee = new Employee();
-
+  listOrg!:any[];
   constructor(private testservice:TestService, private fb:FormBuilder){};
   ngOnInit(): void {
-    console.log(this.testservice.idUpdate);
     var id = this.testservice.idUpdate;
     this.testservice.getById(id).subscribe(sc=>{
       this.employee=sc;
-      console.log(this.employee);
+      this.employee.dob=formatDate(sc.dob);
     })
+    
+    this.testservice.getAllOrg().subscribe(sc=>{
+      this.listOrg=sc;
+    })
+    
+  }
+  
+  get f () {
+    return this.inforForm.controls;
   }
   onSaveClick(){
     if(confirm('Are you want to save ?'))
@@ -33,17 +41,23 @@ export class UpdateEmployeeComponent {
     }
     
   }
+  onChangeOrg(){
+    //console.log(this.inforForm.value.dOB?.toString());
+  }
   inforForm = this.fb.group({
-    firstName: [''],
-    lastName: [''],
-    email: [''],
+    firstName: ['',[Validators.required]],
+    lastName: ['',[Validators.required]],
+    email: ['',[Validators.required,Validators.email]],
     telephone: [''],
     mobiphone: [''],
     address: [''],
     userLogin: [''],
+    dob:['',[Validators.required]],
+    department:['',[Validators.required]],
 
 
   });
+  
   onSubmit () {
     // var form= this.inforForm.value;
     // var employee:IEmployee ={
@@ -97,4 +111,17 @@ class Employee  {
   address!:String;
   userLogin!:String;
   
+}
+function formatDate(date:any) {
+  var d = new Date(date),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear();
+
+  if (month.length < 2) 
+      month = '0' + month;
+  if (day.length < 2) 
+      day = '0' + day;
+
+  return [year, month, day].join('-');
 }

@@ -9,6 +9,7 @@ export class TestService {
   now = new Date();
 
   idUpdate!:number;
+  idWH!:number;
 
   
 
@@ -41,9 +42,28 @@ export class TestService {
   getOrg():Observable<any>{
     return this.httpClient.get('https://localhost:7253/api/Org/get');
   }
-
-  
-
+  getAllOrg():Observable<any>{
+    return this.httpClient.get('https://localhost:7253/api/Org/getAll');
+  }
+  getOrgById(id:number):Observable<any>{
+    return this.httpClient.get('https://localhost:7253/api/Org/'+id+'');
+  }
+  //working History
+  getByIdEmployee(id:number):Observable<any>{
+    return this.httpClient.get('https://localhost:7253/api/WorkingHistory?id='+id+'')
+  }
+  getByIdWH(id:number):Observable<any>{
+    return this.httpClient.get('https://localhost:7253/api/WorkingHistory/'+id+'')
+  }
+  createWH(wh:WorkingHistory):Observable<any>{
+    return this.httpClient.post('https://localhost:7253/api/WorkingHistory',wh)
+  }
+  updateWH(id:number, wh:WorkingHistory):Observable<any>{
+    return this.httpClient.put('https://localhost:7253/api/WorkingHistory/'+id+'',wh)
+  }
+  deleteWH(id:number):Observable<any>{
+    return this.httpClient.delete('https://localhost:7253/api/WorkingHistory?id='+id+'')
+  }
 }
 interface IEmployee {
   hR_Employee_Id:number;
@@ -63,7 +83,19 @@ interface IEmployee {
   address:string;
   userLogin:string;
 }
-
+interface WorkingHistory {
+  hR_WorkingHistory_Id:number;
+  created_Date:string;
+  created_User:string;
+  updated_Date:string;
+  updated_User:string;
+  hR_Employee_Id:number;
+  c_Org_Id:number;
+  form_Date:string;
+  to_date:string;
+  jobTitle:string;
+  salaryAmt:number;
+}
 const Employee:IEmployee = {
   "hR_Employee_Id": 0,
   "created_Date": "2023-01-13T09:21:06.497",

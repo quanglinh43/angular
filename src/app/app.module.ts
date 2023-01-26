@@ -23,6 +23,9 @@ import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import { UpdateEmployeeComponent } from './update-employee/update-employee.component';
 import { OrgComponent } from './org/org.component';
 import { Tree1Component } from './tree1/tree1.component';
+import { DetailEmployeeComponent } from './detail-employee/detail-employee.component';
+import { AddWhComponent } from './add-wh/add-wh.component';
+import { UpdateWhComponent } from './update-wh/update-wh.component';
 
 
 
@@ -36,6 +39,9 @@ import { Tree1Component } from './tree1/tree1.component';
     UpdateEmployeeComponent,
     OrgComponent,
     Tree1Component,
+    DetailEmployeeComponent,
+    AddWhComponent,
+    UpdateWhComponent,
 
 
   ],

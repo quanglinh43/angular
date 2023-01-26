@@ -28,14 +28,29 @@ export class HREmployeeComponent implements OnInit {
       this.page=ls.pageIndex;
       this.totalPage=ls.totalPage;
       if(this.totalPage==1)this.hidePage();
-      console.log(this.list);
+      //console.log(this.list);
 
       
     })
   }
 
-  
+  print (i:string):string{
+    return i;
+  }
 
+  formatDate(date:any) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+  
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+  
+    return [year, month, day].join('-');
+  }
 
   onChange(event:any){
     this._size = (Number)(this.size.nativeElement.value);
@@ -53,7 +68,7 @@ export class HREmployeeComponent implements OnInit {
       this.testService.getAll().subscribe(ls=>{
         this.list=ls;
         this.hidePage();
-        console.log(this.list)
+        //console.log(this.list)
       })
       
     }
@@ -75,7 +90,7 @@ export class HREmployeeComponent implements OnInit {
     this.testService.getList(this.page,this._size).subscribe(ls=>{
       this.list=ls.items;
       this.page=ls.pageIndex;
-      console.log(ls.items.length)
+      //console.log(ls.items.length)
     })
     if(this.page==this.totalPage)this.next=!this.next;
   }
@@ -88,6 +103,9 @@ export class HREmployeeComponent implements OnInit {
     } catch (error) {
       console.log(error);
     }
+  }
+  onDetailClick(event:number){
+    this.testService.idUpdate=event;
   }
   onUpdateClick(event:number){
     this.testService.idUpdate=event;
@@ -136,6 +154,7 @@ export class HREmployeeComponent implements OnInit {
     }
   }
 }
+
 
 
 
