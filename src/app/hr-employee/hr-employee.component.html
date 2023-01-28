@@ -49,19 +49,19 @@
                     <td>{{l.hR_Employee.address}}</td>
                     <!-- <td>{{l.hR_Employee.userLogin}}</td> -->
                     <td>{{l.c_Org_name}}</td>
-                    <td>
-                        <div class="form-check form-switch" style="cursor: pointer;" *ngIf="l.hR_Employee.isActive;else noActive" (click)="onStatusClick(l.hR_Employee.hR_Employee_Id)">
+                    <td class="text-center">
+                        <div class="form-check form-switch text-center" style="cursor: pointer;" *ngIf="l.hR_Employee.isActive;else noActive" (click)="onStatusClick(l.hR_Employee.hR_Employee_Id)">
                             <input class="form-check-input active" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" checked disabled >
                             <label class="form-check-label" for="flexSwitchCheckCheckedDisabled"></label>
                         </div>
                         <ng-template #noActive>
-                            <div class="form-check form-switch" style="cursor: pointer;" (click)="onStatusClick(l.hR_Employee.hR_Employee_Id)">
+                            <div class="form-check form-switch text-center" style="cursor: pointer;" (click)="onStatusClick(l.hR_Employee.hR_Employee_Id)">
                                 <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDisabled" disabled >
                                 <label class="form-check-label" for="flexSwitchCheckDisabled"></label>
                               </div>
                         </ng-template>
                     </td>
-                    <td>
+                    <td class="text-center">
                         <a [routerLink]="['/detail']" routerLinkActive="router-link-active" (click)="onDetailClick(l.hR_Employee.hR_Employee_Id)" >Detail</a>
                         &nbsp;|&nbsp;
                         <a [routerLink]="['/update']" routerLinkActive="router-link-active" (click)="onUpdateClick(l.hR_Employee.hR_Employee_Id)">Edit</a>

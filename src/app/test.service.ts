@@ -10,59 +10,63 @@ export class TestService {
 
   idUpdate!:number;
   idWH!:number;
+  idOrg!:number;
 
   
 
   constructor(private httpClient : HttpClient) { }
   getList(page:number=1,size:number=10) : Observable<any> {
     
-      return this.httpClient.get('https://localhost:7253/api/HR_Employee/'+page+','+size+'');
+      return this.httpClient.get('https://localhost:44332/api/HR_Employee/'+page+','+size+'');
       
   }
   getAll():Observable<any>{
-     return this.httpClient.get('https://localhost:7253/api/HR_Employee');
+     return this.httpClient.get('https://localhost:44332/api/HR_Employee');
   }
 
   getById(id:number):Observable<any>{
-    return this.httpClient.get('https://localhost:7253/api/HR_Employee/'+id+'');
+    return this.httpClient.get('https://localhost:44332/api/HR_Employee/'+id+'');
  }
   add(employee:IEmployee):Observable<any>{
-    return this.httpClient.post('https://localhost:7253/api/HR_Employee',employee);
+    return this.httpClient.post('https://localhost:44332/api/HR_Employee',employee);
   }
   update(id:number, employee:any):Observable<any>{
-    return this.httpClient.put('https://localhost:7253/api/HR_Employee/'+id+'',employee);
+    return this.httpClient.put('https://localhost:44332/api/HR_Employee/'+id+'',employee);
   }
   updateActive(id:number):Observable<any>{
-    return this.httpClient.put('https://localhost:7253/api/HR_Employee?id='+id+'','');
+    return this.httpClient.put('https://localhost:44332/api/HR_Employee?id='+id+'','');
   }
   delete(id:number):Observable<any>{
-    return this.httpClient.delete('https://localhost:7253/api/HR_Employee/'+id+'')
+    return this.httpClient.delete('https://localhost:44332/api/HR_Employee/'+id+'')
   }
   //org
   getOrg():Observable<any>{
-    return this.httpClient.get('https://localhost:7253/api/Org/get');
+    return this.httpClient.get('https://localhost:44332/api/Org/get');
   }
   getAllOrg():Observable<any>{
-    return this.httpClient.get('https://localhost:7253/api/Org/getAll');
+    return this.httpClient.get('https://localhost:44332/api/Org/getAll');
   }
   getOrgById(id:number):Observable<any>{
-    return this.httpClient.get('https://localhost:7253/api/Org/'+id+'');
+    return this.httpClient.get('https://localhost:44332/api/Org/'+id+'');
   }
   //working History
   getByIdEmployee(id:number):Observable<any>{
-    return this.httpClient.get('https://localhost:7253/api/WorkingHistory?id='+id+'')
+    return this.httpClient.get('https://localhost:44332/api/WorkingHistory?id='+id+'')
   }
   getByIdWH(id:number):Observable<any>{
-    return this.httpClient.get('https://localhost:7253/api/WorkingHistory/'+id+'')
+    return this.httpClient.get('https://localhost:44332/api/WorkingHistory/'+id+'')
   }
   createWH(wh:WorkingHistory):Observable<any>{
-    return this.httpClient.post('https://localhost:7253/api/WorkingHistory',wh)
+    return this.httpClient.post('https://localhost:44332/api/WorkingHistory',wh)
   }
   updateWH(id:number, wh:WorkingHistory):Observable<any>{
-    return this.httpClient.put('https://localhost:7253/api/WorkingHistory/'+id+'',wh)
+    return this.httpClient.put('https://localhost:44332/api/WorkingHistory/'+id+'',wh)
   }
   deleteWH(id:number):Observable<any>{
-    return this.httpClient.delete('https://localhost:7253/api/WorkingHistory?id='+id+'')
+    return this.httpClient.delete('https://localhost:44332/api/WorkingHistory?id='+id+'')
+  }
+  updateActiveWH(id:number):Observable<any>{
+    return this.httpClient.put('https://localhost:44332/api/WorkingHistory?id='+id+'','');
   }
 }
 interface IEmployee {
@@ -89,10 +93,11 @@ interface WorkingHistory {
   created_User:string;
   updated_Date:string;
   updated_User:string;
+  isActive:boolean;
   hR_Employee_Id:number;
   c_Org_Id:number;
-  form_Date:string;
-  to_date:string;
+  from_Date:string;
+  to_Date:string|null;
   jobTitle:string;
   salaryAmt:number;
 }

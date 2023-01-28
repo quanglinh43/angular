@@ -65,7 +65,7 @@
                     <label class="batbuoc" [class.text-red]="f.dob.errors && f.dob.dirty"> Birthday:</label>
                     <input type="date" class="form-control" [class.border-red]="f.dob.errors && f.dob.dirty" 
                     formControlName="dob" [(ngModel)]="employee.dob" required>
-                    sn:{{employee.dob}}
+                    
                     <div *ngIf="f.dob.invalid && f.dob.dirty">
                         <div for="" *ngIf="f.dob.errors">
                             <small *ngIf="f.dob.errors?.['required']">The birthday is required</small>
@@ -109,7 +109,9 @@
                 <div class="form-group col-md-4">
                     <label class="batbuoc" [class.text-red]="f.department.errors && f.department.dirty"> Department:</label>
                     <select class="form-select" [class.border-red]="f.department.errors && f.department.dirty" formControlName="department" (change)="onChangeOrg()" [(ngModel)]="employee.c_Org_Id">
+                        <option value="">--Choose--</option>
                         <option *ngFor="let o of listOrg" [value]="o.c_Org_Id">{{o.name}}</option>
+
                     </select>
                     <div *ngIf="f.department.invalid && f.department.dirty">
                         <div for="" *ngIf="f.department.errors">

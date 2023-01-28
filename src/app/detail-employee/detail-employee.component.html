@@ -52,7 +52,7 @@
             <div class="row col-md-12">
                 <h4 class="col-md-6" style="padding-top: 13px;">Working History</h4>
                 <div class="col-md-6 pr-0">
-                    <a type="button" [routerLink]="['/add-wh']" routerLinkActive="router-link-active" class="btn btn-success float-end my-2"  >Add</a>
+                    <a type="button" [routerLink]="['/add-wh']" routerLinkActive="router-link-active" class="btn btn-success float-end my-2" (click)="onAddHWClick(employee.c_Org_Id)" >Add</a>
                 </div>
             </div>
             
@@ -65,6 +65,7 @@
                         <th>End</th>
                         <th>Department</th>
                         <th>Salary Amt</th>
+                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -73,11 +74,24 @@
                         <td>{{i+1}}</td>
                         <td>{{l.jobTitle}}</td>
                         <td>{{formatDate(l.from_Date)}}</td>
-                        <td>{{formatDate(l.to_Date)}}</td>
+                        <td *ngIf="l.to_Date!=null">{{formatDate(l.to_Date)}}</td>
+                        <td *ngIf="l.to_Date==null">Hiện tại</td>
                         <td>{{getNameOrg(l.c_Org_Id)?.name}}</td>
                         <td>{{l.salaryAmt}}</td>
-                        <td>
-                            <a [routerLink]="['/update-wh']" routerLinkActive="router-link-active" (click)="onUpdateWHClick(l.hR_WorkingHistory_Id)">Edit</a>
+                        <td class="text-center">
+                            <div class="form-check form-switch" style="cursor: pointer;" *ngIf="l.isActive;else noActive" (click)="onStatusClick(l.hR_WorkingHistory_Id)">
+                                <input class="form-check-input active" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" checked disabled >
+                                <label class="form-check-label" for="flexSwitchCheckCheckedDisabled"></label>
+                            </div>
+                            <ng-template #noActive>
+                                <div class="form-check form-switch" style="cursor: pointer;" (click)="onStatusClick(l.hR_WorkingHistory_Id)">
+                                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDisabled" disabled >
+                                    <label class="form-check-label" for="flexSwitchCheckDisabled"></label>
+                                  </div>
+                            </ng-template>
+                        </td>
+                        <td class="text-center">
+                            <a [routerLink]="['/update-wh']" routerLinkActive="router-link-active" (click)="onUpdateWHClick(l.hR_WorkingHistory_Id)"> Edit</a>
                             &nbsp;|&nbsp;
                             <a style="text-decoration: underline; color: #0d6efd; cursor: pointer;" (click)="onDeleteWHClick(l.hR_WorkingHistory_Id)" >Delete</a>
                         </td>

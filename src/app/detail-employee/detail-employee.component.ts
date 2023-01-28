@@ -28,13 +28,31 @@ export class DetailEmployeeComponent implements OnInit {
       this.count=sc.length;
       //console.log(this.listWH);
     })
-    this.getNameOrg(1);
+    //this.getNameOrg(1);
   }
-  onUpdateWHClick(event:number){
-
+  onUpdateWHClick(id:number){
+    this.testservice.idWH=id;
   }
-  onDeleteWHClick(event:number){
-
+  onDeleteWHClick(id:number){
+    if(confirm('Are you sure want to delete ?'))
+    try {
+      this.testservice.deleteWH(id).subscribe(sb=>{
+        this.resetPage();
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  onAddHWClick(id:number){
+    this.testservice.idOrg=id;
+  }
+  onStatusClick(id:number){
+    if(confirm('are you sure change status?'))
+    {
+      this.testservice.updateActiveWH(id).subscribe(sc=>{
+        this.resetPage();
+      })
+    }
   }
   getNameOrg(id:number){
     var rs;
@@ -53,6 +71,14 @@ export class DetailEmployeeComponent implements OnInit {
         day = '0' + day;
   
     return [year, month, day].join('-');
+  }
+  resetPage(){
+    var id = this.testservice.idUpdate;
+    this.testservice.getByIdEmployee(id).subscribe(sc=>{
+      this.listWH=sc;
+      this.count=sc.length;
+      //console.log(this.listWH);
+    })
   }
 }
 class Employee  {

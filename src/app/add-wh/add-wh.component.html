@@ -1,18 +1,63 @@
-<h1>Angular 13 Bootstrap Modal Popup Example - Codequs.com </h1>
+<div class="row cool-md-12 text-center pt-3">
+  <h2>Add Working History</h2>
+</div>
+<div class="container-fluid col d-flex justify-content-center">
+  <div class="col-md-12 px-5">
+      <form [formGroup]="inforForm" (ngSubmit)="onSubmit()">
+        <div class="col-md-12 row py-3">
+          <div class="col-md-12 form-group">
+            <label for="" class="batbuoc" [class.text-red]="f.jobTitle.errors && f.jobTitle.dirty">Job title:</label>
+            <input type="text" class="form-control" [class.border-red]="f.jobTitle.errors && f.jobTitle.dirty" formControlName="jobTitle" required>
+            <div *ngIf="f.jobTitle.invalid && f.jobTitle.dirty">
+              <div for="" *ngIf="f.jobTitle.errors">
+                  <small for="" *ngIf="f.jobTitle.errors?.['required']">The job title is required</small>
+              </div>
+          </div>
+          </div>
+        </div>
+        <div class="col-md-12 row py-3">
+          <div class="col-md-6">
+            <label for="" class="batbuoc" [class.text-red]="f.fromDate.errors && f.fromDate.dirty">Begin date:</label>
+            <input type="date" class="form-control" [class.border-red]="f.fromDate.errors && f.fromDate.dirty" formControlName="fromDate" required>
+            <div *ngIf="f.fromDate.invalid && f.fromDate.dirty">
+              <div for="" *ngIf="f.fromDate.errors">
+                  <small for="" *ngIf="f.fromDate.errors?.['required']">The begin date is required</small>
+              </div>
+          </div>
+          </div>
+          <div class="col-md-6">
+            <label for="">End date:</label>
+            <input type="date" class="form-control" formControlName="toDate">
+          </div>
+        </div>
+        <div class="col-md-12 row py-3">
+          <div class="col-md-6">
+            <label for="" class="batbuoc" [class.text-red]="f.department.errors && f.department.dirty">Department:</label>
+            <select class="form-select" [class.border-red]="f.department.errors && f.department.dirty" formControlName="department">
+              <option value="">--Choose--</option>
+              <option *ngFor="let o of listOrg" [value]="o.c_Org_Id">{{o.name}}</option>
+            </select>
+            <div *ngIf="f.department.invalid && f.department.dirty">
+              <div for="" *ngIf="f.department.errors">
+                  <small for="" *ngIf="f.department.errors?.['required']">The department is required</small>
+              </div>
+          </div>
+          </div>
+          <div class="col-md-6">
+            <label for="" class="batbuoc" [class.text-red]="f.salary.errors && f.salary.dirty">Salary:</label>
+            <input type="number" class="form-control" [class.border-red]="f.salary.errors && f.salary.dirty" formControlName="salary" required>
+            <div *ngIf="f.salary.invalid && f.salary.dirty">
+              <div for="" *ngIf="f.salary.errors">
+                  <small for="" *ngIf="f.salary.errors?.['required']">The salary is required</small>
+              </div>
+          </div>
+          </div>
+        </div>
+        <button type="submit" [disabled]="!inforForm.valid"  class="btn btn-success">Add</button>
+        <button type="reset" class="btn btn-warning mx-3">Clear</button>
+        <button type="button" class="btn btn-dark" [routerLink]="['/detail']" routerLinkActive="router-link-active">Back</button>
+      </form>
+  </div>
+</div>
+
     
-<button class="btn btn-lg btn-outline-primary" (click)="open(mymodal)">Open My Modal</button>
-    
-<ng-template #mymodal let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Bootstrap Modal</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">×</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    This is example from Codequs.com
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
-  </div>
-</ng-template>
