@@ -11,10 +11,9 @@ import {MatTreeNestedDataSource} from '@angular/material/tree';
 export class OrgComponent implements OnInit {
   treeControl = new NestedTreeControl<menuItem>(node => node.c_Orgs);
   dataSource = new MatTreeNestedDataSource<menuItem>();
+  click:boolean=false;
+  click1:boolean=false;
   constructor (private testService:TestService){
-    
-    
-    
   }
   ngOnInit(){
     this.testService.getOrg().subscribe(sc=>{
@@ -23,6 +22,12 @@ export class OrgComponent implements OnInit {
     
   }
   hasChild = (_: number, node: menuItem) => !!node.c_Orgs && node.c_Orgs.length > 0;
+  onClick(){
+    this.click=!this.click;
+  }
+  onClick1(){
+    this.click1=!this.click1;
+  }
 }
 
 class menuItem {

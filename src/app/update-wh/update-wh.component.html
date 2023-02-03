@@ -1,59 +1,61 @@
-<div class="row cool-md-12 text-center pt-3">
-    <h2>Add Working History</h2>
+<div class="row col-md-12 text-center pt-3">
+    <h2>Update Working History</h2>
   </div>
   <div class="container-fluid col d-flex justify-content-center">
     <div class="col-md-12 px-5">
         <form [formGroup]="inforForm" (ngSubmit)="onSubmit()">
-          <div class="col-md-12 row py-3">
-            <div class="col-md-12 form-group">
-              <label for="" class="batbuoc" [class.text-red]="f.jobTitle.errors && f.jobTitle.dirty">Job title:</label>
-              <input type="text" class="form-control" [class.border-red]="f.jobTitle.errors && f.jobTitle.dirty" formControlName="jobTitle" [(ngModel)]="wh.jobTitle" required>
-              <div *ngIf="f.jobTitle.invalid && f.jobTitle.dirty">
-                <div for="" *ngIf="f.jobTitle.errors">
-                    <small for="" *ngIf="f.jobTitle.errors?.['required']">The job title is required</small>
-                </div>
-            </div>
-            </div>
+          <div class="col-md-12 row py-3"> 
+            <mat-form-field class="form-group col-md-12">
+              <mat-label >Job Title</mat-label>
+              <input matInput type="text" formControlName="jobTitle" [(ngModel)]="wh.jobTitle" required>
+            </mat-form-field>
           </div>
           <div class="col-md-12 row py-3">
-            <div class="col-md-6">
-              <label for="" class="batbuoc" [class.text-red]="f.fromDate.errors && f.fromDate.dirty">Begin date:</label>
-              <input type="date" class="form-control" [class.border-red]="f.fromDate.errors && f.fromDate.dirty" formControlName="fromDate" [(ngModel)]="wh.from_Date" required>
-              <div *ngIf="f.fromDate.invalid && f.fromDate.dirty">
-                <div for="" *ngIf="f.fromDate.errors">
-                    <small for="" *ngIf="f.fromDate.errors?.['required']">The begin date is required</small>
-                </div>
-            </div>
-            </div>
-            <div class="col-md-6">
-              <label for="">End date:</label>
-              <input type="date" class="form-control" formControlName="toDate" [(ngModel)]="wh.to_Date">
-            </div>
+            <mat-form-field class="form-group col-md-6" appearance="fill">
+              <mat-label> Begin date</mat-label>
+              <input matInput formControlName="fromDate" [matDatepicker]="picker"[(ngModel)]="wh.from_Date" required>
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="form-group col-md-6" appearance="fill">
+              <mat-label> End date</mat-label>
+              <input matInput formControlName="toDate" [matDatepicker]="picker1" [(ngModel)]="wh.to_Date">
+              <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
           </div>
           <div class="col-md-12 row py-3">
-            <div class="col-md-6">
-              <label for="" class="batbuoc" [class.text-red]="f.department.errors && f.department.dirty">Department:</label>
-              <select class="form-select" [class.border-red]="f.department.errors && f.department.dirty" formControlName="department" [(ngModel)]="wh.c_Org_Id">
-                <option value="">--Choose--</option>
-                <option *ngFor="let o of listOrg" [value]="o.c_Org_Id">{{o.name}}</option>
-              </select>
-              <div *ngIf="f.department.invalid && f.department.dirty">
-                <div for="" *ngIf="f.department.errors">
-                    <small for="" *ngIf="f.department.errors?.['required']">The department is required</small>
-                </div>
-            </div>
-            </div>
-            <div class="col-md-6">
-              <label for="" class="batbuoc" [class.text-red]="f.salary.errors && f.salary.dirty">Salary:</label>
-              <input type="number" class="form-control" [class.border-red]="f.salary.errors && f.salary.dirty" formControlName="salary" [(ngModel)]="wh.salaryAmt" required>
-              <div *ngIf="f.salary.invalid && f.salary.dirty">
-                <div for="" *ngIf="f.salary.errors">
-                    <small for="" *ngIf="f.salary.errors?.['required']">The salary is required</small>
-                </div>
-            </div>
-            </div>
+            <mat-form-field appearance="fill" class="col-md-6">
+              <mat-label> Department</mat-label>
+              <mat-select formControlName="department" [(ngModel)]="wh.c_Org_Id" required>
+                  <mat-option value="" selected>--Choose--</mat-option>
+                  <span *ngFor="let lv1 of listOrg1" >
+                      <mat-option [style.padding-left.px]="15" [value]="lv1.c_Org_Id" class="text-nowrap">
+                          {{lv1.name}}
+                      </mat-option>
+                      <span *ngIf="lv1.c_Orgs">
+                          <span *ngFor="let lv2 of lv1.c_Orgs">
+                              <mat-option [style.padding-left.px]="30" [value]="lv2.c_Org_Id" class="text-nowrap">
+                                  {{lv2.name}}
+                              </mat-option>
+                              <span *ngIf="lv2.c_Orgs">
+                                  <span *ngFor="let lv3 of lv2.c_Orgs">
+                                      <mat-option [style.padding-left.px]="45" [value]="lv3.c_Org_Id" class="text-nowrap">
+                                          {{lv3.name}}
+                                      </mat-option>
+                                  </span>
+                              </span>
+                          </span>
+                      </span>
+                  </span>
+              </mat-select>
+          </mat-form-field>
+            <mat-form-field class="form-group col-md-6">
+              <mat-label >Salary:</mat-label>
+              <input matInput type="number" formControlName="salary" [(ngModel)]="wh.salaryAmt" required>
+            </mat-form-field>
           </div>
-          <button type="submit" [disabled]="!inforForm.valid"  class="btn btn-success" [routerLink]="['/detail']" routerLinkActive="router-link-active" (click)="onSaveClick()">Save</button>
+          <button type="submit" [disabled]="!inforForm.valid"  class="btn btn-success" (click)="onSaveClick()">Save</button>
           <button type="reset" class="btn btn-warning mx-3">Clear</button>
           <button type="button" class="btn btn-dark" [routerLink]="['/detail']" routerLinkActive="router-link-active">Back</button>
         </form>

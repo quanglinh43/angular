@@ -1,0 +1,54 @@
+<div  class="row col-md-12" style="height: 40px;">
+    <h2 mat-dialog-title>Add ORG</h2>
+</div>
+<hr>
+<div class="container-fluid col d-flex justify-content-center">
+    <div class="col-md-12 px-5">
+        <form [formGroup]="inforForm" (ngSubmit)="onSubmit()">
+            <div class="col-md-12 row py-3">
+                <mat-form-field class="form-group col-md-6">
+                    <mat-label  [class.text-red]="f.name.errors && f.name.dirty">Name</mat-label>
+                    <input matInput type="text" [class.border-red]="f.name.errors && f.name.dirty" formControlName="name" required>
+                </mat-form-field>
+                <mat-form-field class="form-group col-md-6">
+                    <mat-label  [class.text-red]="f.code.errors && f.code.dirty">Code</mat-label>
+                    <input matInput type="text" [class.border-red]="f.code.errors && f.code.dirty" formControlName="code" required> 
+                </mat-form-field>
+            </div>
+            <div class="col-md-12 row py-3">
+                <mat-form-field class="form-group col-md-6">
+                    <mat-label  [class.text-red]="f.orderValue.errors && f.orderValue.dirty">Order Value</mat-label>
+                    <input matInput type="number" [class.border-red]="f.orderValue.errors && f.orderValue.dirty" formControlName="orderValue" required>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="col-md-6">
+                    <mat-label  [class.text-red]="f.parent_Id.errors && f.parent_Id.dirty"> Parent</mat-label>
+                    <mat-select [class.border-red]="f.parent_Id.errors && f.parent_Id.dirty" formControlName="parent_Id">
+                        <mat-option value="" selected>--Choose--</mat-option>
+                        <span *ngFor="let lv1 of listOrg1" >
+                            <mat-option [style.padding-left.px]="15" [value]="lv1.c_Org_Id" class="text-nowrap">
+                                {{lv1.name}}
+                            </mat-option>
+                            <span *ngIf="lv1.c_Orgs">
+                                <span *ngFor="let lv2 of lv1.c_Orgs">
+                                    <mat-option [style.padding-left.px]="30" [value]="lv2.c_Org_Id" class="text-nowrap">
+                                        {{lv2.name}}
+                                    </mat-option>
+                                    <span *ngIf="lv2.c_Orgs">
+                                        <span *ngFor="let lv3 of lv2.c_Orgs">
+                                            <mat-option [style.padding-left.px]="45" [value]="lv3.c_Org_Id" class="text-nowrap">
+                                                {{lv3.name}}
+                                            </mat-option>
+                                        </span>
+                                    </span>
+                                </span>
+                            </span>
+                        </span>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <button type="submit" [disabled]="!inforForm.valid" class="btn btn-success">Add</button>
+            <button type="reset" class="btn btn-warning mx-3">Clear</button>
+            <button type="button" class="btn btn-dark" (click)="onCloseClick()">Close</button>
+        </form>
+    </div>
+</div>

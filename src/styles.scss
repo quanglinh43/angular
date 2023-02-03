@@ -161,3 +161,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-
     content: "* ";
     color: red;
 }
+
+h2 {
+    color: #46515c;
+}
+
+.mat-mdc-list-item-unscoped-content .mdc-list-item__primary-text {
+    color: white !important;
+}
+input[class="form-check-input active"] {
+    background-color: #001830 !important;
+    border-color:#001830 !important;
+}

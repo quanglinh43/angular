@@ -1,0 +1,57 @@
+<div class="row col-md-12 text-center pt-3">
+    <h2>Org List</h2>
+</div>
+<div class="container-fluid col d-flex justify-content-center">
+    <div class="col-md-12 px-5">
+        <div class="col-md-12 pr-0">
+            <a mat-raised-button  class=" float-end my-2" (click)="onAddOrgClick() " style="color: white; background-color: #708090;">Add</a>
+        </div>
+        <table class="table table-border table-hover table-bordered">
+            <thead>
+                <tr class="text-center">
+                    
+                    <th>No.</th>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Create Date</th>
+                    <th>Order Value</th>
+                    <th>Parent</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let org of listOrg; let i = index;">
+                    <td>{{i+1}}</td>
+                    <td>{{org.code}}</td>
+                    <td>{{org.name}}</td>
+                    <td>{{formatDate(org.created_Date)}}</td>
+                    <td>{{org.orderValue}}</td>
+                    <td *ngIf="getNameOrg(org.parent_Id);else casenull">{{getNameOrg(org.parent_Id).name}}</td>
+                    <ng-template #casenull>
+                        <td>
+
+                        </td>
+                    </ng-template>
+                    <td class="text-center">
+                        <div class="form-check form-switch" style="cursor: pointer;" *ngIf="org.isActive;else noActive" (click)="onStatusClick(org.c_Org_Id)" >
+                            <input class="form-check-input active" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" checked disabled >
+                            <label class="form-check-label" for="flexSwitchCheckCheckedDisabled"></label>
+                        </div>
+                        <ng-template #noActive>
+                            <div class="form-check form-switch" style="cursor: pointer;" (click)="onStatusClick(org.c_Org_Id)">
+                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDisabled" disabled >
+                                <label class="form-check-label" for="flexSwitchCheckDisabled"></label>
+                              </div>
+                        </ng-template>
+                    </td>
+                    <td class="text-center">
+                        <a style="color: #708090; cursor: pointer;" (click)="onUpdateOrgClick(org.c_Org_Id)"> <mat-icon aria-hidden="false" aria-label="Example edit_square icon" fontIcon="edit_square"></mat-icon></a>
+                        &nbsp;&nbsp;
+                        <a style="color: #708090; cursor: pointer;" (click)="onDeleteOrgClick(org.c_Org_Id)" ><mat-icon aria-hidden="false" aria-label="Example delete icon" fontIcon="delete"></mat-icon></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -70,11 +70,28 @@
 <div class="container-fluid row">
 <div class="col-md-2 float-left" style="background-color: slategray; min-height: 930px;">
 <img  src="https://www.brggroup.vn/public/media//logo.png" alt="logo" style="width: 138px;height: 123px;padding: 15px;">
-
 <app-org></app-org>
+<!-- <div class=" pt-2" style="border-bottom: outset 3px;">
+  <button mat-button class="col-md-12" style="color: white;" [routerLink]="['/list-org']" routerLinkActive="router-link-active">Org management</button>
+</div>
+<div class=" pt-2" style="border-bottom: outset 3px;">
+  <button mat-button class="col-md-12" style="color: white;" [routerLink]="['']" routerLinkActive="router-link-active">Employee management</button>
+</div> -->
+
+  <!-- <mat-list role="list">
+    <div class=" pt-2" style="border-bottom: outset 3px;">
+      <a [routerLink]="['/list-org']" routerLinkActive="router-link-active" style="color: white; text-decoration: none; margin-left: 20px;"  >Org management</a>
+    </div>
+    <div class=" pt-2" style="border-bottom: outset 3px;">
+      
+      <a [routerLink]="['']" routerLinkActive="router-link-active" style="color: white; text-decoration: none; margin-left: 20px;">Employee management</a>
+    </div>
+  </mat-list> -->
+
 </div>
 <div class="col-md-10 float-left">
   <router-outlet></router-outlet>
+  
 </div>
 </div>
 

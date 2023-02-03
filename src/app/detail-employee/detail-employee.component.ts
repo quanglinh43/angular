@@ -17,6 +17,7 @@ export class DetailEmployeeComponent implements OnInit {
     this.testservice.getAllOrg().subscribe(sc=>{
       this.listOrg=sc;
       //console.log(this.listOrg);
+      
     })
     var id = this.testservice.idUpdate;
     this.testservice.getById(id).subscribe(sc=>{
@@ -71,6 +72,19 @@ export class DetailEmployeeComponent implements OnInit {
         day = '0' + day;
   
     return [year, month, day].join('-');
+  }
+  formatDateTable(date:any) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+  
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+  
+    return [day,month,year].join('/');
   }
   resetPage(){
     var id = this.testservice.idUpdate;

@@ -1,36 +1,28 @@
-<div class="row cool-md-12 text-center pt-3">
+<div class="row col-md-12 text-center pt-3">
     <h2>Employee List</h2>
 </div>
 <div class="container-fluid col d-flex justify-content-center">
     <div class="col-md-12 px-5">
-        <div class="col-md-12 row pr-0 mr-0">
-            <div class="col-md-6 pr-0">
-                <select #size name="size" id=""class="custome-select" (change)="onChange($event)" style="margin-top: 20px;">
-                    <option value="5" >5</option>
-                    <option value="10" selected>10</option>
-                    <option value="15">15</option>
-                    <option value="0">All</option>
-                </select>
-            </div>
-            <div class="col-md-6 pr-0">
-                <a type="button" [routerLink]="['/add']" routerLinkActive="router-link-active" class="btn btn-success float-end my-2"  >Add</a>
-            </div>
-            
-            
+        <div class="col-md-12 pr-0 mr-0">
+            <select #size name="size" id=""  (change)="onChange($event)" style="margin-top: 20px;">
+                <option value="5" >5</option>
+                <option value="10" selected>10</option>
+                <option value="15">15</option>
+                <option value="0">All</option>
+            </select>
+            <a mat-raised-button [routerLink]="['/add']" routerLinkActive="router-link-active" class=" float-end my-2" style="color: white; background-color: #708090;"  >Add</a>
         </div>
         <table class="table table-border table-hover table-bordered">
             <thead>
                 <tr class="text-center">
                     
-                    <th>STT</th>
-                    <th>FirstName</th>
-                    <th>LastName</th>
+                    <th>No.</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
                     <th>Birthday</th>
                     <th>Email</th>
-                    <!-- <th>Telephone</th> -->
                     <th>Mobiphone</th>
                     <th>Address</th>
-                    <!-- <th>UserLogin</th> -->
                     <th>Department</th>
                     <th>Status</th>
                     <th>Action</th>
@@ -42,12 +34,10 @@
                     <td>{{i+1}}</td>
                     <td>{{l.hR_Employee.firstName}}</td>
                     <td>{{l.hR_Employee.lastName}}</td>
-                    <td>{{formatDate(l.hR_Employee.dob)}}</td>
+                    <td>{{formatDateTable(l.hR_Employee.dob)}}</td>
                     <td>{{l.hR_Employee.email}}</td>
-                    <!-- <td>{{l.hR_Employee.telephone}}</td> -->
                     <td>{{l.hR_Employee.mobiphone}}</td>
                     <td>{{l.hR_Employee.address}}</td>
-                    <!-- <td>{{l.hR_Employee.userLogin}}</td> -->
                     <td>{{l.c_Org_name}}</td>
                     <td class="text-center">
                         <div class="form-check form-switch text-center" style="cursor: pointer;" *ngIf="l.hR_Employee.isActive;else noActive" (click)="onStatusClick(l.hR_Employee.hR_Employee_Id)">
@@ -62,19 +52,23 @@
                         </ng-template>
                     </td>
                     <td class="text-center">
-                        <a [routerLink]="['/detail']" routerLinkActive="router-link-active" (click)="onDetailClick(l.hR_Employee.hR_Employee_Id)" >Detail</a>
-                        &nbsp;|&nbsp;
-                        <a [routerLink]="['/update']" routerLinkActive="router-link-active" (click)="onUpdateClick(l.hR_Employee.hR_Employee_Id)">Edit</a>
-                        &nbsp;|&nbsp;
-                        <a style="text-decoration: underline; color: #0d6efd; cursor: pointer;" (click)="onDeleteClick(l.hR_Employee.hR_Employee_Id)" >Delete</a>
+                        <a style="color: #708090;" [routerLink]="['/detail']" routerLinkActive="router-link-active" (click)="onDetailClick(l.hR_Employee.hR_Employee_Id)" ><mat-icon aria-hidden="false" aria-label="Example description icon" fontIcon="description"></mat-icon></a>
+                        &nbsp;&nbsp;
+                        <a style="color: #708090;" [routerLink]="['/update']" routerLinkActive="router-link-active" (click)="onUpdateClick(l.hR_Employee.hR_Employee_Id)"><mat-icon aria-hidden="false" aria-label="Example edit_square icon" fontIcon="edit_square"></mat-icon></a>
+                        &nbsp;&nbsp;
+                        <a style="text-decoration: underline; color: #708090; cursor: pointer;" (click)="onDeleteClick(l.hR_Employee.hR_Employee_Id)" ><mat-icon aria-hidden="false" aria-label="Example delete icon" fontIcon="delete"></mat-icon></a>
+                            
                     </td>
                 </tr>
             </tbody>
         </table>
         <div>
-            <a #prePage  [hidden]="previous" (click)="onPreClick()" style="text-decoration: underline; color: #0d6efd; cursor: pointer;">Previous</a>&nbsp;
-            <label #pageIndex>{{page}}</label>
-            &nbsp;<a #nextPage  [hidden]="next" (click)="onNextClick()" style="text-decoration: underline; color: #0d6efd; cursor: pointer;">Next</a>
+            <a #prePage  [hidden]="previous" (click)="onPreClick()" style="text-decoration: underline; color: #708090; cursor: pointer;"><mat-icon aria-hidden="false" aria-label="Example skip_previous icon" fontIcon="skip_previous"></mat-icon></a>&nbsp;
+            <label #pageIndex style="vertical-align: top; padding-top: 3px;">{{page}} of {{totalPage}}</label>
+            &nbsp;<a #nextPage  [hidden]="next" (click)="onNextClick()" style="text-decoration: underline; color: #708090; cursor: pointer;"><mat-icon aria-hidden="false" aria-label="Example skip_next icon" fontIcon="skip_next"></mat-icon></a>
         </div>
     </div>
 </div>
+
+
+  

@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+
 import { TestService } from '../test.service';
 
 @Component({
@@ -29,8 +30,8 @@ export class HREmployeeComponent implements OnInit {
       this.totalPage=ls.totalPage;
       if(this.totalPage==1)this.hidePage();
       //console.log(this.list);
-
-      
+      // var list1 = this.list.employee.filter( (p:any)=>p.firstName=='Linh');
+      // console.log(list1)
     })
   }
 
@@ -51,7 +52,19 @@ export class HREmployeeComponent implements OnInit {
   
     return [year, month, day].join('-');
   }
-
+  formatDateTable(date:any) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+  
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+  
+    return [day,month,year].join('/');
+  }
   onChange(event:any){
     this._size = (Number)(this.size.nativeElement.value);
     if(this._size!=0)
@@ -124,7 +137,6 @@ export class HREmployeeComponent implements OnInit {
     this.nextPage.nativeElement.hidden=true;
   } 
   public showPage() {
-    //this.prePage.nativeElement.hidden=false;
     this.pageIndex.nativeElement.hidden=false;
     this.nextPage.nativeElement.hidden=false;
   } 

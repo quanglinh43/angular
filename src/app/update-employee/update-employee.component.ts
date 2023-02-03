@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { TestService } from '../test.service';
 
 @Component({
@@ -11,7 +12,8 @@ export class UpdateEmployeeComponent {
   now = new Date();
   employee = new Employee();
   listOrg!:any[];
-  constructor(private testservice:TestService, private fb:FormBuilder){};
+  listOrg1!:any[];
+  constructor(private testservice:TestService, private fb:FormBuilder,private router: Router){};
   ngOnInit(): void {
     var id = this.testservice.idUpdate;
     this.testservice.getById(id).subscribe(sc=>{
@@ -22,6 +24,9 @@ export class UpdateEmployeeComponent {
     this.testservice.getAllOrg().subscribe(sc=>{
       this.listOrg=sc;
     })
+    this.testservice.getOrg().subscribe(sc=>{
+      this.listOrg1=sc;
+    })
     
   }
   
@@ -29,15 +34,17 @@ export class UpdateEmployeeComponent {
     return this.inforForm.controls;
   }
   onSaveClick(){
+    this.employee.dob=formatDate(this.employee.dob);
     if(confirm('Are you want to save ?'))
     {
       this.employee.updated_Date=this.now.toISOString();
       this.employee.updated_User='linh';
+      
       this.testservice.update(this.testservice.idUpdate,this.employee).subscribe(sc=>{
         
       })
       alert('Save success!');
-      
+      this.router.navigate(['']); 
     }
     
   }
@@ -59,37 +66,6 @@ export class UpdateEmployeeComponent {
   });
   
   onSubmit () {
-    // var form= this.inforForm.value;
-    // var employee:IEmployee ={
-    //   "hR_Employee_Id": 0,
-    //   "created_Date": "2023-01-13T09:21:06.497",
-    //   "created_User":"linh",
-    //   "updated_Date":"2023-01-13T09:21:06.497",
-    //   "updated_User":"linh",
-    //   "isActive": true,
-    //   "code":"",
-    //   "firstName":(String)(form.firstName),
-    //   "lastName": (String)(form.lastName),
-    //   "dob":"2023-01-13T09:54:16.070Z",
-    //   "email":(String)(form.email),
-    //   "telephone":(String)(form.telephone),
-    //   "mobiphone":(String)(form.mobiphone),
-    //   "c_Org_Id":2,
-    //   "address":(String)(form.address),
-    //   "userLogin":(String)(form.userLogin),
-    // }
-    // try {
-    //   this.testservice.add(employee).subscribe(sb=>{
-    //     alert('Add Success');
-        
-    //   })
-    //   this.inforForm.reset();
-    // } catch (error) {
-    //   console.log(error);
-    // }
-    // console.log(this.employee);
-    
-
   }
 }
 

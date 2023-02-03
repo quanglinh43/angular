@@ -1,4 +1,4 @@
-<div class="row cool-md-12 text-center pt-3">
+<div class="row col-md-12 text-center pt-3">
     <h2>Detail Employee</h2>
 </div>
 <div class="container-fluid col d-flex justify-content-center">
@@ -52,14 +52,14 @@
             <div class="row col-md-12">
                 <h4 class="col-md-6" style="padding-top: 13px;">Working History</h4>
                 <div class="col-md-6 pr-0">
-                    <a type="button" [routerLink]="['/add-wh']" routerLinkActive="router-link-active" class="btn btn-success float-end my-2" (click)="onAddHWClick(employee.c_Org_Id)" >Add</a>
+                    <a mat-raised-button [routerLink]="['/add-wh']" routerLinkActive="router-link-active" class="float-end my-2" (click)="onAddHWClick(employee.c_Org_Id)" style="color: white; background-color: #708090;" >Add</a>
                 </div>
             </div>
             
             <table class="table table-border table-hover table-bordered">
                 <thead >
                     <tr class="text-center">
-                        <th>STT</th>
+                        <th>No.</th>
                         <th>Job Title</th>
                         <th>Begin</th>
                         <th>End</th>
@@ -70,11 +70,11 @@
                     </tr>
                 </thead>
                 <tbody *ngIf="count > 0; else rong">
-                    <tr *ngFor="let l of listWH; let i = index ">
+                    <tr *ngFor="let l of listWH; let i = index ; let last = last; let first = first">
                         <td>{{i+1}}</td>
                         <td>{{l.jobTitle}}</td>
-                        <td>{{formatDate(l.from_Date)}}</td>
-                        <td *ngIf="l.to_Date!=null">{{formatDate(l.to_Date)}}</td>
+                        <td>{{formatDateTable(l.from_Date)}}</td>
+                        <td *ngIf="l.to_Date!=null">{{formatDateTable(l.to_Date)}}</td>
                         <td *ngIf="l.to_Date==null">Hiện tại</td>
                         <td>{{getNameOrg(l.c_Org_Id)?.name}}</td>
                         <td>{{l.salaryAmt}}</td>
@@ -90,10 +90,10 @@
                                   </div>
                             </ng-template>
                         </td>
-                        <td class="text-center">
-                            <a [routerLink]="['/update-wh']" routerLinkActive="router-link-active" (click)="onUpdateWHClick(l.hR_WorkingHistory_Id)"> Edit</a>
-                            &nbsp;|&nbsp;
-                            <a style="text-decoration: underline; color: #0d6efd; cursor: pointer;" (click)="onDeleteWHClick(l.hR_WorkingHistory_Id)" >Delete</a>
+                        <td class="text-center" *ngIf="first">
+                            <a style="color: #708090;" [routerLink]="['/update-wh']" routerLinkActive="router-link-active" (click)="onUpdateWHClick(l.hR_WorkingHistory_Id)"> <mat-icon aria-hidden="false" aria-label="Example edit_square icon" fontIcon="edit_square"></mat-icon></a>
+                            &nbsp;&nbsp;
+                            <a style="text-decoration: underline; color: #708090; cursor: pointer;" (click)="onDeleteWHClick(l.hR_WorkingHistory_Id)" ><mat-icon aria-hidden="false" aria-label="Example delete icon" fontIcon="delete"></mat-icon></a>
                         </td>
                     </tr>
                 </tbody>

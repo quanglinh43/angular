@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
-import { catchError, Observable, throwError,BehaviorSubject, of  } from 'rxjs';
+import {  Observable, throwError,BehaviorSubject, of  } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +48,18 @@ export class TestService {
   }
   getOrgById(id:number):Observable<any>{
     return this.httpClient.get('https://localhost:44332/api/Org/'+id+'');
+  }
+  createOrg(org:Org):Observable<any>{
+    return this.httpClient.post('https://localhost:44332/api/Org',org);
+  }
+  updateOrg(id:number, org:Org):Observable<any>{
+    return this.httpClient.put('https://localhost:44332/api/Org/'+id+'',org);
+  }
+  updateActiveOrg(id:number):Observable<any>{
+    return this.httpClient.put('https://localhost:44332/api/Org?id='+id+'','');
+  }
+  deleteOrg(id:number):Observable<any>{
+    return this.httpClient.delete('https://localhost:44332/api/Org?id='+id+'');
   }
   //working History
   getByIdEmployee(id:number):Observable<any>{
@@ -100,6 +112,18 @@ interface WorkingHistory {
   to_Date:string|null;
   jobTitle:string;
   salaryAmt:number;
+}
+interface Org {
+  c_Org_Id:number;
+  created_Date:string;
+  created_User:string;
+  updated_Date:string;
+  updated_User:string;
+  isActive:boolean;
+  code:string;
+  name:string;
+  orderValue:number;
+  parent_Id:number;
 }
 const Employee:IEmployee = {
   "hR_Employee_Id": 0,
