@@ -55,9 +55,9 @@
             <input matInput type="number" formControlName="salary" required>
           </mat-form-field>
         </div>
-        <button type="button" [disabled]="!inforForm.valid"  class="btn btn-success" (click)="onAddClick()">Add</button>
-        <button type="reset" class="btn btn-warning mx-3" (click)="onClear()">Clear</button>
-        <button type="button" class="btn btn-dark" [routerLink]="['/detail']" routerLinkActive="router-link-active">Back</button>
+        <button mat-raised-button type="button" [disabled]="!inforForm.valid" (click)="onAddClick()" style="color: white; background-color: #708090;">Add<mat-icon aria-hidden="false" aria-label="Example note_add icon" fontIcon="note_add"></mat-icon></button>
+        <button mat-raised-button type="reset" class=" mx-3" (click)="onClear()" style="color: white; background-color: #708090;">Clear<mat-icon aria-hidden="false" aria-label="Example clear_all icon" fontIcon="clear_all"></mat-icon></button>
+        <button mat-raised-button type="button" [routerLink]="['/detail']" routerLinkActive="router-link-active" style="color: white; background-color: #708090;">Back<mat-icon aria-hidden="false" aria-label="Example arrow_back icon" fontIcon="arrow_back"></mat-icon></button>
       </form>
   </div>
 </div>

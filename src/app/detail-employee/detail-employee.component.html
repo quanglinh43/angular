@@ -52,7 +52,7 @@
             <div class="row col-md-12">
                 <h4 class="col-md-6" style="padding-top: 13px;">Working History</h4>
                 <div class="col-md-6 pr-0">
-                    <a mat-raised-button [routerLink]="['/add-wh']" routerLinkActive="router-link-active" class="float-end my-2" (click)="onAddHWClick(employee.c_Org_Id)" style="color: white; background-color: #708090;" >Add</a>
+                    <a mat-raised-button [routerLink]="['/add-wh']" routerLinkActive="router-link-active" class="float-end my-2" (click)="onAddHWClick(employee.c_Org_Id)" style="color: white; background-color: #708090;" >Add<mat-icon aria-hidden="false" aria-label="Example add icon" fontIcon="add"></mat-icon></a>
                 </div>
             </div>
             
@@ -107,7 +107,7 @@
             </table>
         </div>
         <hr style="margin-top: 100px;">
-        <button type="button" class="btn btn-dark" [routerLink]="['']" routerLinkActive="router-link-active">Back</button>
+        <button mat-raised-button type="button" [routerLink]="['']" routerLinkActive="router-link-active" style="color: white; background-color: #708090;">Back<mat-icon aria-hidden="false" aria-label="Example arrow_back icon" fontIcon="arrow_back"></mat-icon></button>
     </div>
     
     

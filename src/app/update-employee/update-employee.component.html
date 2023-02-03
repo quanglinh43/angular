@@ -103,9 +103,9 @@
                 </mat-form-field>
                 
             </div>
-            <button type="button" [disabled]="!inforForm.valid" class="btn btn-success" (click)="onSaveClick()">Save</button>
-            <button type="reset" class="btn btn-warning mx-3">Clear</button>
-            <button type="button" class="btn btn-dark" [routerLink]="['']" routerLinkActive="router-link-active">Back</button>
+            <button mat-raised-button type="button" [disabled]="!inforForm.valid" (click)="onSaveClick()" style="color: white; background-color: #708090;">Save<mat-icon aria-hidden="false" aria-label="Example save icon" fontIcon="save"></mat-icon></button>
+            <button mat-raised-button type="reset" class=" mx-3" style="color: white; background-color: #708090;">Clear<mat-icon aria-hidden="false" aria-label="Example clear_all icon" fontIcon="clear_all"></mat-icon></button>
+            <button mat-raised-button type="button"  [routerLink]="['']" routerLinkActive="router-link-active" style="color: white; background-color: #708090;">Back<mat-icon aria-hidden="false" aria-label="Example arrow_back icon" fontIcon="arrow_back"></mat-icon></button>
         </form>
     </div>
 </div>
