@@ -70,11 +70,10 @@ export class AddEmployeeComponent implements OnInit {
       {
         console.log(sc)
         console.log(this.listOrg)
-        console.log(this.getNameOrg((Number)(sc.department)))
         this.listWH.unshift(sc);
         this.count=this.listWH.length;  
         console.log(this.listWH);
-        this.inforForm.value.department=sc.department;
+        this.inforForm.value.department=sc.c_Org_Id;
       }
     })
   }

@@ -59,7 +59,7 @@
                 </mat-form-field>
                 <mat-form-field appearance="fill" class="col-md-4">
                     <mat-label  [class.text-red]="f.department.errors && f.department.dirty"> Department</mat-label>
-                    <mat-select [class.border-red]="f.department.errors && f.department.dirty" formControlName="department" (change)="onChangeOrg()" required>
+                    <mat-select [class.border-red]="f.department.errors && f.department.dirty" formControlName="department" (change)="onChangeOrg()" [(ngModel)]="inforForm.value.department" required>
                         <mat-option value="" selected>--Choose--</mat-option>
                         <span *ngFor="let lv1 of listOrg1" >
                             <mat-option [style.padding-left.px]="15" [value]="lv1.c_Org_Id" class="text-nowrap">
