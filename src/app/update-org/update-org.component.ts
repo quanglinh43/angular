@@ -33,7 +33,9 @@ export class UpdateOrgComponent implements OnInit {
     })
   }
   onSubmit(){
-    if(confirm('Are you want to save ?'))
+    if(this.inforForm.valid)
+    {
+      if(confirm('Are you want to save ?'))
     {
       this.org.updated_Date=this.now.toISOString();
       this.org.updated_User='linh';
@@ -44,6 +46,7 @@ export class UpdateOrgComponent implements OnInit {
         this.dialogRef.close();
       })
       
+    }
     }
     
   }

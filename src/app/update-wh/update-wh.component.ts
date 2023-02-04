@@ -34,7 +34,9 @@ export class UpdateWhComponent implements OnInit {
   }
   onSubmit(){}
   onSaveClick(){
-    this.wh.from_Date=formatDate(this.wh.from_Date);
+    if(this.inforForm.valid)
+    {
+      this.wh.from_Date=formatDate(this.wh.from_Date);
     //this.wh.to_Date=formatDate(this.wh.to_Date)
     this.wh.to_Date=this.inforForm.value.toDate?formatDate((String)(this.inforForm.value.toDate)):null
     if(confirm('Are you want to save ?'))
@@ -47,7 +49,7 @@ export class UpdateWhComponent implements OnInit {
       alert('Save success!');
       this.router.navigate(['/detail']);
     }
-    
+    }
   }
   inforForm = this.fb.group({
     jobTitle: ['',[Validators.required]],

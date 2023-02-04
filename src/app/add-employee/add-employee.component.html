@@ -9,44 +9,35 @@
                 <mat-form-field class="form-group col-md-4">
                     <mat-label  [class.text-red]="f.firstName.errors && f.firstName.dirty">First Name</mat-label>
                     <input matInput type="text" [class.border-red]="f.firstName.errors && f.firstName.dirty" formControlName="firstName" required>
-                    <div *ngIf="f.firstName.invalid && f.firstName.dirty">
-                        <div for="" *ngIf="f.firstName.errors">
-                            <small for="" *ngIf="f.firstName.errors?.['required']">The first name is required</small>
-                        </div>
-                    </div> 
+                    <mat-error>
+                        <small for="" *ngIf="f.firstName.errors?.['required']">The first name is required</small>
+                    </mat-error> 
                 </mat-form-field>
                 <mat-form-field class="form-group col-md-4">
                     <mat-label  [class.text-red]="f.lastName.errors && f.lastName.dirty"> Last Name</mat-label>
                     <input matInput type="text" [class.border-red]="f.lastName.errors && f.lastName.dirty" formControlName="lastName" required>
-                    <div *ngIf="f.lastName.invalid && f.lastName.dirty">
-                        <div for="" *ngIf="f.lastName.errors">
-                            <small for="" *ngIf="f.lastName.errors?.['required']">The last name is required</small>
-                        </div>
-                    </div>
+                    <mat-error>
+                        <small for="" *ngIf="f.lastName.errors?.['required']">The last name is required</small>
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field class="form-group col-md-4" appearance="fill">
                     <mat-label  [class.text-red]="f.dOB.errors && f.dOB.dirty"> Birthday</mat-label>
                     <input matInput [class.border-red]="f.dOB.errors && f.dOB.dirty" formControlName="dOB" [matDatepicker]="picker" required>
                     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
-                    <div *ngIf="f.dOB.invalid && f.dOB.dirty">
-                        <div for="" *ngIf="f.dOB.errors">
-                            <small *ngIf="f.dOB.errors?.['required']">The birthday is required</small>
-                        </div>  
-                    </div>
+                    <mat-error>
+                        <small *ngIf="f.dOB.errors?.['required']">The birthday is required</small> 
+                    </mat-error>
                 </mat-form-field>
             </div>
             <div class="col-md-12 row py-3">
                 <mat-form-field class="form-group col-md-4">
                     <mat-label  [class.text-red]="f.email.errors && f.email.dirty">Email</mat-label>
                     <input matInput type="email" [class.border-red]="f.email.errors && f.email.dirty" formControlName="email" required>
-                    <div *ngIf="f.email.invalid && f.email.dirty">
-                        <div for="" *ngIf="f.email.errors">
-                            <small *ngIf="f.email.errors?.['required']">The email is required</small>
-    
-                            <small *ngIf="f.email.errors?.['email']">Must be email</small>
-                        </div>
-                    </div>
+                    <mat-error>
+                        <small *ngIf="f.email.errors?.['required']">The email is required</small>
+                        <small *ngIf="f.email.errors?.['email']">Must be email</small>
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field class="form-group col-md-4">
                     <mat-label>Telephone</mat-label>
@@ -90,16 +81,13 @@
                             </span>
                         </span>
                     </mat-select>
-                    <div *ngIf="f.department.invalid && f.department.dirty">
-                        <div for="" *ngIf="f.department.errors">
-                            <small for="" *ngIf="f.department.errors?.['required']">The department is required</small>
-                        </div>
-                    </div>
+                    <mat-error>
+                        <small for="" *ngIf="f.department.errors?.['required']">The department is required</small>
+                    </mat-error>
                 </mat-form-field>
-                
             </div>
             <!-- <button type="submit" class="btn btn-success">Add</button> -->
-            <button mat-raised-button  type="submit" [disabled]="!inforForm.valid" style="color: white; background-color: #708090;" >Add <mat-icon aria-hidden="false" aria-label="Example note_add icon" fontIcon="note_add"></mat-icon></button>
+            <button mat-raised-button  type="submit" style="color: white; background-color: #708090;" >Add <mat-icon aria-hidden="false" aria-label="Example note_add icon" fontIcon="note_add"></mat-icon></button>
             <button mat-raised-button type="reset" class="mx-3" style="color: white; background-color: #708090;">Clear <mat-icon aria-hidden="false" aria-label="Example clear_all icon" fontIcon="clear_all"></mat-icon></button>
             <button mat-raised-button type="button" [routerLink]="['']" routerLinkActive="router-link-active" style="color: white; background-color: #708090;">Back<mat-icon aria-hidden="false" aria-label="Example arrow_back icon" fontIcon="arrow_back"></mat-icon></button>
         </form>

@@ -34,7 +34,9 @@ export class UpdateEmployeeComponent {
     return this.inforForm.controls;
   }
   onSaveClick(){
-    this.employee.dob=formatDate(this.employee.dob);
+    if(this.inforForm.valid)
+    {
+      this.employee.dob=formatDate(this.employee.dob);
     if(confirm('Are you want to save ?'))
     {
       this.employee.updated_Date=this.now.toISOString();
@@ -45,6 +47,7 @@ export class UpdateEmployeeComponent {
       })
       alert('Save success!');
       this.router.navigate(['']); 
+    }
     }
     
   }

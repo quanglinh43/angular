@@ -31,26 +31,29 @@ ngOnInit(): void {
 }
 onSubmit(){
   var form= this.inforForm.value;
-  var org:Org={
-    "c_Org_Id": 0,
-    "created_Date": "2023-02-01T01:25:24.476Z",
-    "created_User": "",
-    "updated_Date": "2023-02-01T01:25:24.476Z",
-    "updated_User": "",
-    "isActive": true,
-    "code": (String)(form.code),
-    "name": (String)(form.name),
-    "orderValue": (Number)(form.orderValue),
-    "parent_Id": (Number)(form.parent_Id),
-  }
-  try {
-    this.testservice.createOrg(org).subscribe(sb=>{
-      alert('Add Success');
-      this.dialogRef.close();
-    })
-    
-  } catch (error) {
-    alert('Add fail! Please check again!');
+  if(this.inforForm.valid)
+  {
+    var org:Org={
+      "c_Org_Id": 0,
+      "created_Date": "2023-02-01T01:25:24.476Z",
+      "created_User": "",
+      "updated_Date": "2023-02-01T01:25:24.476Z",
+      "updated_User": "",
+      "isActive": true,
+      "code": (String)(form.code),
+      "name": (String)(form.name),
+      "orderValue": (Number)(form.orderValue),
+      "parent_Id": (Number)(form.parent_Id),
+    }
+    try {
+      this.testservice.createOrg(org).subscribe(sb=>{
+        alert('Add Success');
+        this.dialogRef.close();
+      })
+      
+    } catch (error) {
+      alert('Add fail! Please check again!');
+    }
   }
   
 }

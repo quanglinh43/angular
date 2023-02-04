@@ -9,16 +9,25 @@
                 <mat-form-field class="form-group col-md-6">
                     <mat-label >Name</mat-label>
                     <input matInput type="text" formControlName="name" [(ngModel)]="org.name" required>
+                    <mat-error>
+                        <small for="" *ngIf="f.name.errors?.['required']">The name is required</small>
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field class="form-group col-md-6">
                     <mat-label >Code</mat-label>
-                    <input matInput type="text" formControlName="code" [(ngModel)]="org.code" required> 
+                    <input matInput type="text" formControlName="code" [(ngModel)]="org.code" required>
+                    <mat-error>
+                        <small for="" *ngIf="f.code.errors?.['required']">The code is required</small>
+                    </mat-error> 
                 </mat-form-field>
             </div>
             <div class="col-md-12 row py-3">
                 <mat-form-field class="form-group col-md-6">
                     <mat-label >Order Value</mat-label>
                     <input matInput type="number" formControlName="orderValue" [(ngModel)]="org.orderValue" required>
+                    <mat-error>
+                        <small for="" *ngIf="f.orderValue.errors?.['required']">The order value is required</small>
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="fill" class="col-md-6">
                     <mat-label  > Parent</mat-label>
@@ -46,7 +55,7 @@
                     </mat-select>
                 </mat-form-field>
             </div>
-            <button mat-raised-button type="submit" [disabled]="!inforForm.valid" style="color: white; background-color: #708090;">Save<mat-icon aria-hidden="false" aria-label="Example save icon" fontIcon="save"></mat-icon></button>
+            <button mat-raised-button type="submit" style="color: white; background-color: #708090;">Save<mat-icon aria-hidden="false" aria-label="Example save icon" fontIcon="save"></mat-icon></button>
             <button mat-raised-button type="reset" class=" mx-3" style="color: white; background-color: #708090;">Clear<mat-icon aria-hidden="false" aria-label="Example clear_all icon" fontIcon="clear_all"></mat-icon></button>
             <button mat-raised-button type="button" (click)="onCloseClick()" style="color: white; background-color: #708090;">Close<mat-icon aria-hidden="false" aria-label="Example close icon" fontIcon="close"></mat-icon></button>
         </form>

@@ -32,31 +32,34 @@ export class AddWhComponent implements OnInit {
     salary:['',[Validators.required]],
   })
   onAddClick(){
-    try {
-      var form= this.inforForm.value;
-      var idEmployee= this.testservice.idUpdate;
-      if(form.toDate==""||form.toDate==null)
-        form.toDate=null;
-      var wh:WorkingHistory = {
-        "hR_WorkingHistory_Id": 0,
-        "created_Date": "2023-01-01",
-        "created_User": "",
-        "updated_Date": "2023-01-01",
-        "updated_User": "",
-        "isActive": true,
-        "hR_Employee_Id": idEmployee,
-        "c_Org_Id": (Number)(form.department),
-        "from_Date": this.formatDate((String)(form.fromDate)),
-        "to_Date": form.toDate?this.formatDate((String)(form.toDate)):null,
-        "jobTitle": (String)(form.jobTitle),
-        "salaryAmt": (Number)(form.salary)
+    if(this.inforForm.valid)
+    {
+      try {
+        var form= this.inforForm.value;
+        var idEmployee= this.testservice.idUpdate;
+        if(form.toDate==""||form.toDate==null)
+          form.toDate=null;
+        var wh:WorkingHistory = {
+          "hR_WorkingHistory_Id": 0,
+          "created_Date": "2023-01-01",
+          "created_User": "",
+          "updated_Date": "2023-01-01",
+          "updated_User": "",
+          "isActive": true,
+          "hR_Employee_Id": idEmployee,
+          "c_Org_Id": (Number)(form.department),
+          "from_Date": this.formatDate((String)(form.fromDate)),
+          "to_Date": form.toDate?this.formatDate((String)(form.toDate)):null,
+          "jobTitle": (String)(form.jobTitle),
+          "salaryAmt": (Number)(form.salary)
+        }
+        this.testservice.createWH(wh).subscribe(sb=>{
+          alert('Add Success');
+          this.router.navigate(['/detail']);  
+        })
+      } catch (error) {
+        alert('Add fail! Please check again!');
       }
-      this.testservice.createWH(wh).subscribe(sb=>{
-        alert('Add Success');
-        this.router.navigate(['/detail']);  
-      })
-    } catch (error) {
-      alert('Add fail! Please check again!');
     }
   }
   onSubmit(){
