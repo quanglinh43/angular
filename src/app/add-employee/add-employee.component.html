@@ -86,6 +86,65 @@
                     </mat-error>
                 </mat-form-field>
             </div>
+            <hr>
+            <div class="col-md-12 mt-4 pr-3 pb-3">
+                <div class="row col-md-12">
+                    <h4 class="col-md-6" style="padding-top: 13px;">Working History</h4>
+                    <div class="col-md-6 pr-0">
+                        <a mat-raised-button class="float-end my-2" (click)="onAddHWClick()" style="color: white; background-color: #708090;" >Add<mat-icon aria-hidden="false" aria-label="Example add icon" fontIcon="add"></mat-icon></a>
+                    </div>
+                </div>
+                <table class="table table-border table-hover table-bordered">
+                    <thead class="tableE">
+                        <tr class="text-center">
+                            <th>No.</th>
+                            <th>Job Title</th>
+                            <th>Begin</th>
+                            <th>End</th>
+                            <th>Department</th>
+                            <th>Salary Amt</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="count > 0; else rong">
+                        <tr *ngFor="let l of listWH; let i = index ; let last = last; let first = first">
+                            <td>{{i+1}}</td>
+                            <td>{{l.jobTitle}}</td>
+                            <td>{{l.from_Date}}</td>
+                            <td *ngIf="l.to_Date!=null">{{l.to_Date}}</td>
+                            <td *ngIf="l.to_Date==null">Hiện tại</td>
+                            <td>{{getNameOrg(l.c_Org_Id)?.name}}</td>
+                            <td>{{l.salaryAmt}}</td>
+                            <td class="text-center">
+                                <div class="form-check form-switch" style="cursor: pointer;" *ngIf="l.isActive;else noActive" (click)="onStatusClick(l.hR_WorkingHistory_Id)">
+                                    <input class="form-check-input active" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" checked disabled >
+                                    <label class="form-check-label" for="flexSwitchCheckCheckedDisabled"></label>
+                                </div>
+                                <ng-template #noActive>
+                                    <div class="form-check form-switch" style="cursor: pointer;" (click)="onStatusClick(l.hR_WorkingHistory_Id)">
+                                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDisabled" disabled >
+                                        <label class="form-check-label" for="flexSwitchCheckDisabled"></label>
+                                      </div>
+                                </ng-template>
+                            </td>
+                            <td class="text-center" *ngIf="first">
+                                <a style="color: #708090;" [routerLink]="['/update-wh']" routerLinkActive="router-link-active" (click)="onUpdateWHClick(l.hR_WorkingHistory_Id)"> <mat-icon aria-hidden="false" aria-label="Example edit_square icon" fontIcon="edit_square"></mat-icon></a>
+                                &nbsp;&nbsp;
+                                <a style="text-decoration: underline; color: #708090; cursor: pointer;" (click)="onDeleteWHClick(l.hR_WorkingHistory_Id)" ><mat-icon aria-hidden="false" aria-label="Example delete icon" fontIcon="delete"></mat-icon></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <ng-template #rong>
+                        <tbody >
+                            <tr class="text-center py-3">
+                                No Work History
+                            </tr>
+                        </tbody>
+                    </ng-template>
+                </table>
+            </div>
+            <hr class="py-3">
             <!-- <button type="submit" class="btn btn-success">Add</button> -->
             <button mat-raised-button  type="submit" style="color: white; background-color: #708090;" >Add <mat-icon aria-hidden="false" aria-label="Example note_add icon" fontIcon="note_add"></mat-icon></button>
             <button mat-raised-button type="reset" class="mx-3" style="color: white; background-color: #708090;">Clear <mat-icon aria-hidden="false" aria-label="Example clear_all icon" fontIcon="clear_all"></mat-icon></button>

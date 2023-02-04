@@ -21,7 +21,7 @@ export class OrgListComponent implements OnInit {
     const dialogRef = this.dialog.open(AddOrgComponent, {
       height: '400px',
       width: '1000px',
-      position: {right:'360px',top:'100px',bottom:'',left:''},
+      position: {right:'360px',top:'110px',bottom:'',left:''},
     });
     dialogRef.afterClosed().subscribe(sc=>{
       this.resetPage();
@@ -31,7 +31,7 @@ export class OrgListComponent implements OnInit {
     const dialogRef = this.dialog.open(UpdateOrgComponent, {
       height: '400px',
       width: '1000px',
-      position: {right:'360px',top:'100px',bottom:'',left:''},
+      position: {right:'360px',top:'110px',bottom:'',left:''},
       data:{
         id: id,
       }

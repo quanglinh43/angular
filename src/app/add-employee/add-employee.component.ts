@@ -4,6 +4,10 @@ import { ngbCarouselTransitionOut } from '@ng-bootstrap/ng-bootstrap/carousel/ca
 import { TestService } from '../test.service';
 import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { AddOrgComponent } from '../add-org/add-org.component';
+import { AddWhComponent } from '../add-wh/add-wh.component';
+import { AddWhPComponent } from '../add-wh-p/add-wh-p.component';
 
 @Component({
   selector: 'app-add-employee',
@@ -15,8 +19,11 @@ export class AddEmployeeComponent implements OnInit {
   now = new Date();
   listOrg1!:any[];
   listOrg!:any[];
+  listWH:WorkingHistory[]=[];
+  count:number=0;
+  
   date='';
-  constructor(private testservice:TestService, private fb:FormBuilder,private router: Router){
+  constructor(private testservice:TestService, private fb:FormBuilder,private router: Router,public dialog: MatDialog){
   
   };
   ngOnInit(): void {
@@ -47,6 +54,38 @@ export class AddEmployeeComponent implements OnInit {
   });
   onChangeOrg(){
     //console.log(this.inforForm.value.dOB?.toString());
+  }
+  onAddHWClick(){
+    const dialogRef = this.dialog.open(AddWhPComponent, {
+      height: '550px',
+      width: '1000px',
+      position: {right:'360px',top:'110px',bottom:'',left:''},
+      data:{
+        
+      },
+    });
+    dialogRef.afterClosed().subscribe(sc=>{
+      
+      if(sc)
+      {
+        console.log(sc)
+        console.log(this.listOrg)
+        console.log(this.getNameOrg((Number)(sc.department)))
+        this.listWH.unshift(sc);
+        this.count=this.listWH.length;  
+        console.log(this.listWH);
+        this.inforForm.value.department=sc.department;
+      }
+    })
+  }
+  onStatusClick(id:number){
+
+  }
+  onUpdateWHClick(id:number){
+
+  }
+  onDeleteWHClick(id:number){
+
   }
   onSubmit () {
     var form= this.inforForm.value;
@@ -83,6 +122,36 @@ export class AddEmployeeComponent implements OnInit {
     }
     
   }
+  formatDate(date:any) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+  
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+  
+    return [year, month, day].join('-');
+  }
+  formatDateTable(date:any) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+  
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+  
+    return [day,month,year].join('/');
+  }
+  getNameOrg(id:number){
+    var org = this.listOrg.find(p=>p.c_Org_Id==id);
+    return org;
+  }
 }
 
 
@@ -116,4 +185,18 @@ function formatDate(date:any) {
       day = '0' + day;
 
   return [year, month, day].join('-');
+}
+interface WorkingHistory {
+  hR_WorkingHistory_Id:number;
+  created_Date:string;
+  created_User:string;
+  updated_Date:string;
+  updated_User:string;
+  isActive:boolean;
+  hR_Employee_Id:number;
+  c_Org_Id:number;
+  from_Date:string;
+  to_Date:string|null;
+  jobTitle:string;
+  salaryAmt:number;
 }

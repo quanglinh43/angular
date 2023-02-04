@@ -1,0 +1,75 @@
+<div  class="container-fluid col d-flex col-md-12" style="height: 65px; background-color: #708090;">
+    <h2 mat-dialog-title style="color: #fff;">Add ORG</h2>
+</div>
+<div class="container-fluid col d-flex justify-content-center pt-3">
+    <div class="col-md-12 px-5">
+        <form [formGroup]="inforForm" (ngSubmit)="onSubmit()">
+          <div class="col-md-12 row py-3"> 
+            <mat-form-field class="form-group col-md-12">
+              <mat-label >Job Title</mat-label>
+              <input matInput type="text" formControlName="jobTitle" required>
+              <mat-error>
+                <small for="" *ngIf="f.jobTitle.errors?.['required']">The job title is required</small>
+            </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-12 row py-3">
+            <mat-form-field class="form-group col-md-6" appearance="fill">
+              <mat-label> Begin date</mat-label>
+              <input matInput formControlName="from_Date" [matDatepicker]="picker" required>
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              <mat-error>
+                <small for="" *ngIf="f.from_Date.errors?.['required']">The begin date is required</small>
+            </mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-group col-md-6" appearance="fill">
+              <mat-label> End date</mat-label>
+              <input matInput formControlName="to_Date" [matDatepicker]="picker1">
+              <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+          </div>
+          <div class="col-md-12 row py-3">
+            <mat-form-field appearance="fill" class="col-md-6">
+              <mat-label> Department</mat-label>
+              <mat-select formControlName="c_Org_Id" required>
+                  <mat-option value="" selected>--Choose--</mat-option>
+                  <span *ngFor="let lv1 of listOrg1" >
+                      <mat-option [style.padding-left.px]="15" [value]="lv1.c_Org_Id" class="text-nowrap">
+                          {{lv1.name}}
+                      </mat-option>
+                      <span *ngIf="lv1.c_Orgs">
+                          <span *ngFor="let lv2 of lv1.c_Orgs">
+                              <mat-option [style.padding-left.px]="30" [value]="lv2.c_Org_Id" class="text-nowrap">
+                                  {{lv2.name}}
+                              </mat-option>
+                              <span *ngIf="lv2.c_Orgs">
+                                  <span *ngFor="let lv3 of lv2.c_Orgs">
+                                      <mat-option [style.padding-left.px]="45" [value]="lv3.c_Org_Id" class="text-nowrap">
+                                          {{lv3.name}}
+                                      </mat-option>
+                                  </span>
+                              </span>
+                          </span>
+                      </span>
+                  </span>
+              </mat-select>
+              <mat-error>
+                <small for="" *ngIf="f.c_Org_Id.errors?.['required']">The department is required</small>
+            </mat-error>
+          </mat-form-field>
+            <mat-form-field class="form-group col-md-6">
+              <mat-label >Salary:</mat-label>
+              <input matInput type="number" formControlName="salaryAmt" required>
+              <mat-error>
+                <small for="" *ngIf="f.salaryAmt.errors?.['required']">The salary is required</small>
+            </mat-error>
+            </mat-form-field>
+          </div>
+          <button mat-raised-button type="submit" (click)="onAddClick()"  style="color: white; background-color: #708090;">Add<mat-icon aria-hidden="false" aria-label="Example note_add icon" fontIcon="note_add"></mat-icon></button>
+          <button mat-raised-button type="reset" class=" mx-3" style="color: white; background-color: #708090;">Clear<mat-icon aria-hidden="false" aria-label="Example clear_all icon" fontIcon="clear_all"></mat-icon></button>
+          <button mat-raised-button type="button" (click)="onCloseClick()" style="color: white; background-color: #708090;">Close<mat-icon aria-hidden="false" aria-label="Example close icon" fontIcon="close"></mat-icon></button>
+        </form>
+    </div>
+</div>

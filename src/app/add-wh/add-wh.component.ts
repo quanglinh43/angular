@@ -31,6 +31,7 @@ export class AddWhComponent implements OnInit {
     department:[this.testservice.idOrg,[Validators.required]],
     salary:['',[Validators.required]],
   })
+  
   onAddClick(){
     if(this.inforForm.valid)
     {

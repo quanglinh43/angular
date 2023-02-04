@@ -38,6 +38,7 @@ import { UpdateWhComponent } from './update-wh/update-wh.component';
 import { AddOrgComponent } from './add-org/add-org.component';
 import { UpdateOrgComponent } from './update-org/update-org.component';
 import { OrgListComponent } from './org-list/org-list.component';
+import { AddWhPComponent } from './add-wh-p/add-wh-p.component';
 
 
 
@@ -58,6 +59,7 @@ import { OrgListComponent } from './org-list/org-list.component';
     AddOrgComponent,
     UpdateOrgComponent,
     OrgListComponent,
+    AddWhPComponent,
 
 
   ],
